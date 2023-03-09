@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for  message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>Mensaje:</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    {% endfor %}
+
+    <h1>Sign Up</h1>
+    <form action="/signup" method="post">
+    {% csrf_token %}
+        <label for="">Username</label>
+        <input type="text" id="username" name="username" placeholder="Crear un usuario (solo letras y numeros)" Required>
+        <br>
+        <label for="">Nombre</label>
+        <input type="text" id="fname" name="fname" placeholder="Escribe tu Nombre" Required>
+        <br>
+        <label for="">Apellido</label>
+        <input type="text" id="lname" name="lname" placeholder="Escribe tu apellido" Required>
+        <br>
+        <label for="">Email</label>
+        <input type="email" id="email" name="email" placeholder="Escribe tu email" Required>
+        <br>
+        <label for="">Password</label>
+        <input type="password" id="pass1" name="pass1" placeholder="Create un password" Required>
+        <br> 
+        <label for="">Confirm your Password</label>
+        <input type="password" id="pass2" name="pass2" placeholder="Confirma tu password" Required>
+         <br>
+         
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
