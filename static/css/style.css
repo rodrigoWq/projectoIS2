@@ -12,6 +12,12 @@ body {
 	margin: 0 auto;
 	padding: 20px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	box-sizing: border-box;
 }
 
 /* Estilos CSS para el encabezado */
@@ -50,6 +56,6 @@ button:hover {
     color:white;
   }
   
-  .boton:hover {
+.boton:hover {
     background-color: #3e8e41;
   }
