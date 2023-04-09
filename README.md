@@ -1,3 +1,3 @@
 # projectoIS2
-Rodrigo Paniagua
-Emilio Saldivar
+- Rodrigo Paniagua
+- Emilio Saldivar
