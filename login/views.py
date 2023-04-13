@@ -1,9 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse 
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-
+from .models import Usuario
 
 # Create your views here.
 def home(request):
@@ -73,3 +73,40 @@ def signout(request):
     logout(request)
     messages.success(request, "Saliste correctamente")
     return redirect('home')
+
+
+def listar_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, "login/listar_usuarios.html", {'usuarios':usuarios})
+
+def crear_usuario(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        email = request.POST['email']
+        telefono = request.POST['telefono']
+        usuario = Usuario(nombre=nombre, email=email, telefono=telefono)
+        usuario.save()
+        return redirect('listar_usuarios')
+    else:
+        return render(request, 'login/crear_usuario.html')
+    
+def eliminar_usuario(request, usuario_id):
+    usuario = get_object_or_404(Usuario, id=usuario_id)
+    usuario.delete()
+    return redirect('listar_usuarios')
+
+def edicionUsuario(request,usuario_id):
+    usuario = get_object_or_404(Usuario,id=usuario_id)
+    return render(request,"login/editar_usuario.html", {"usuario":usuario})
+
+def editar_usuario(request):
+    nombre = request.POST['nombre']
+    email = request.POST['email']
+    telefono = request.POST['telefono']
+    id_usuario = request.POST['id_usuario']
+    usuario = get_object_or_404(Usuario,id=id_usuario)
+    usuario.nombre = nombre
+    usuario.email = email
+    usuario.telefono =  telefono
+    usuario.save()
+    return redirect('listar_usuarios')

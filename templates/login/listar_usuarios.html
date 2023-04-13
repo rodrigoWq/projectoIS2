@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Usuarios</title>
+</head>
+<body>
+    {% for usuario in usuarios %}
+        <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+        <p><strong>ID:</strong> {{ usuario.id }}</p>
+        <a href="edicionUsuario/{{usuario.id}}" class="boton">Editar</a> &nbsp;&nbsp;
+        <a href="eliminar_usuario/{{usuario.id}}">Eliminar</a>
+    {% endfor %}
+    <br>
+    <br>
+    <button type="submit"><a href="/crear_usuario" class="boton">CREAR USUARIO</a></button>
+
+</body>
+</html>
