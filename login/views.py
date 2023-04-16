@@ -110,3 +110,6 @@ def editar_usuario(request):
     usuario.telefono =  telefono
     usuario.save()
     return redirect('listar_usuarios')
+
+def volver_home(request):
+    return render(request,"login/index.html")
