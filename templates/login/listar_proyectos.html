@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Proyectos</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Backlog ID</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proyecto in proyectos %}
+            <tr>
+                <td>{{ proyecto.nombre }}</td>
+                <td>{{ proyecto.backlog_id }}</td>
+                <td><a href="edicionProyecto/{{proyecto.backlog_id}}" class="boton">Editar</a></td>
+                <td><a href="eliminar_proyecto/{{proyecto.backlog_id}}">Eliminar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <button type="submit"><a href="/crear_proyecto" class="boton">CREAR PROYECTO</a></button>
+
+</body>
+</html>

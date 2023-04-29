@@ -24,7 +24,11 @@
         
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required>
-    
+        
+        {% if error %}
+        <p style="color: red">{{ error }}</p>
+        {% endif %}
+
         <label for="telefono">Teléfono:</label>
         <input type="tel" name="telefono" id="telefono" required>
     

@@ -1,18 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Usuario(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_usuario = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     telefono = models.CharField(max_length=20)
+
+
 class Proyecto(models.Model):
-    nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
-    backlog_id = models.CharField(max_length=32)
-    product_owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='proyectos_product_owner')
-    scrum_master = models.ForeignKey(User, on_delete=models.CASCADE, related_name='proyectos_scrum_master')
-    team_members = models.ManyToManyField(User, related_name='proyectos_team_member')
+    backlog_id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100, unique=True)
+
+
+class Rol(models.Model):
+    idRol = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=2, choices=(('SM', 'Scrum Master'), ('PO', 'Product Owner'), ('TM', 'Team Member')))
+
+class UsuarioProyectoRol(models.Model):
+    id_usuario_proyecto_rol = models.AutoField(primary_key=True)
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    backlog_id = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    idRol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    
+     

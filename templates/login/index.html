@@ -21,16 +21,19 @@
 
 
     <div class="container">
-        <h1>Welcome to my app</h1>
+        <h1>Bienvenido a la aplicación</h1>
         <p>Este es un sitio web en proceso de construccion.</p>
         {% if user.is_authenticated %}
         <button type="submit"><a href="/listar_usuarios" class="boton">CRUD USUARIOS</a></button>
         <hr>
-        <button type="submit"><a href="" class="boton">CRUD PROYECTOS</a></button>
-        <h3>Hello {{ fname }}</h3>
-        <h4>You're successfully logged in. </h4>
+        <button type="submit"><a href="/asignar_usuario_proyecto_rol" class="boton">ASIGNAR USUARIOS A PROYECTO</a></button>
+        <hr>
+        <button type="submit"><a href="/listar_proyectos" class="boton">CRUD PROYECTOS</a></button>
+        <h3>Hola {{ fname }}</h3>
+        <h4>Iniciaste sesión correctamente. </h4>
         <button type="submit"><a href="/signout" class="boton">SignOut</a></button>
         {% else %}
+        <button type="submit"><a href="/signup">SignUp</a></button>
         <button type="submit"><a href="/signin" class="boton">SignIn</a></button>
         {% endif %}
     </div>

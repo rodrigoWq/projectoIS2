@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Proyecto</title>
+</head>
+<body>
+    <h1>{{ proyecto.nombre }}</h1>
+    <p><strong>Descripción:</strong> {{ proyecto.descripcion }}</p>
+    <p><strong>Fecha de inicio:</strong> {{ proyecto.fecha_inicio }}</p>
+    <p><strong>Fecha de fin:</strong> {{ proyecto.fecha_fin }}</p>
+    <p><strong>Backlog ID:</strong> {{ proyecto.backlog_id }}</p>
+    <p><strong>Product Owner:</strong> {{ proyecto.product_owner }}</p>
+    <p><strong>Scrum Master:</strong> {{ proyecto.scrum_master }}</p>
+    <p><strong>Team Members:</strong></p>
+    <ul>
+    {% for team_member in proyecto.team_members.all %}
+        <li>{{ team_member }}</li>
+    {% empty %}
+        <li>No hay miembros de equipo asignados.</li>
+    {% endfor %}
+    </ul>
+    <br>
+    <br>
+    <button type="submit"><a href="{% url 'editar_proyecto' proyecto.id %}" class="boton">Editar</a></button>
+    <button type="submit"><a href="{% url 'eliminar_proyecto' proyecto.id %}" class="boton">Eliminar</a></button>
+</body>
+</html>

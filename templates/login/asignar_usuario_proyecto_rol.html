@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Asignar usuario a proyecto con rol</title>
+</head>
+<body>
+	<form method="POST">
+		{% csrf_token %}
+		<label for="id_usuario">Usuario:</label>
+		<select name="id_usuario" id="id_usuario">
+			{% for usuario in usuarios %}
+					<option value="{{usuario.pk}}">{{usuario.nombre}}</option>
+			{% endfor %}
+		</select>
+		<label for="nombre_rol">Rol:</label>
+		<select name="nombre_rol" id="nombre_rol">
+			{% for rol in roles %}
+					<option value="{{rol.nombre}}">{{rol.nombre}}</option>
+			{% endfor %}
+		</select>
+		<label for="backlog_id">Proyecto:</label>
+		<select name="backlog_id" id="backlog_id">
+			{% for proyecto in proyectos %}
+					<option value="{{proyecto.pk}}">{{proyecto.nombre}}</option>
+			{% endfor %}
+		</select>
+		<br>
+		<button type="submit">Asignar usuario al proyecto</button>
+	</form>
+</body>
+</html>

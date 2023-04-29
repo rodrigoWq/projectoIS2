@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Proyecto</title>
+</head>
+<body>
+    <h1>Editar proyecto "{{ proyecto.nombre }}"</h1>
+    <form action="/editar_proyecto/{{ proyecto.id }}" method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" value="{{ proyecto.nombre }}" required>
+        <br>
+        <br>
+        <button type="submit">Guardar cambios</button>
+    </form>
+</body>
+</html>

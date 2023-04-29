@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lista de usuarios, proyectos y roles</title>
+</head>
+<body>
+	<h1>Lista de usuarios, proyectos y roles</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Usuario</th>
+				<th>Proyecto</th>
+				<th>Rol</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for upr in usuarios_proyectos_roles %}
+			<tr>
+				<td>{{ upr.id_usuario.username }}</td>
+				<td>{{ upr.backlog_id.nombre }}</td>
+				<td>{{ upr.idRol.nombre }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<a href="{% url 'asignar_usuario_proyecto_rol' %}">Asignar usuario a proyecto con rol</a>
+</body>
+</html>
