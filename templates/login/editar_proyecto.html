@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Proyecto</title>
+</head>
+<body>
+    <h1>Editar Proyecto</h1>
+    <form action="/editar_proyecto" method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" value="{{ proyecto.nombre }}" required>
+        <br>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" name="descripcion" id="descripcion" value="{{ proyecto.descripcion }}" required>
+        <br>
+        <input type="hidden" name="id_proyecto" value="{{proyecto.backlog_id}}">
+    
+        <h2>Usuarios asociados</h2>
+
+        {% for usuarioproyecto in proyecto.usuarioproyecto_set.all %}
+        <div id="usuariosProyectSelects">
+ 
+            <select name="usuarios[]">
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}" {% if usuario.nombre == usuarioproyecto.usuario.nombre %}selected{% endif %}>{{ usuario.nombre }}</option>
+                {% endfor %}
+            </select>
+            <select name="roles[]">
+                <option value="PO" {% if usuarioproyecto.rol_usuario.tipo_rol == 'PO' %}selected{% endif %}>Product Owner</option>
+                <option value="SM" {% if usuarioproyecto.rol_usuario.tipo_rol == 'SM' %}selected{% endif %}>Scrum Master</option>
+                <option value="TM" {% if usuarioproyecto.rol_usuario.tipo_rol == 'TM' %}selected{% endif %}>Team Member</option>
+            </select>
+            <span class="borrarSelect">x</span>
+            <br>
+        </div>
+        {% endfor %}
+        <button type="button" id="mostrarSelects">Agregar usuario</button>
+        <div id="contenedorSelects">
+ 
+        </div>
+    
+        <br>
+        <button type="submit">Guardar cambios</button>
+    </form>
+
+
+    <style>
+        .borrarSelect {
+          display: inline-block;
+          padding: 0.25em 0.5em;
+          background-color: #eee;
+          border: 1px solid #aaa;
+          border-radius: 0.25em;
+          cursor: pointer;
+          margin-left: 0.5em;
+        }
+      </style>
+    
+    <script>
+        const btnMostrarSelects = document.querySelector('#mostrarSelects');
+        const contenedorSelects = document.querySelector('#contenedorSelects');
+    
+        const select1 = `
+          <div class="selects">
+            <label>Usuario:</label>
+            <select name="usuarios[]">
+              {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+              {% endfor %}
+            </select>
+            <label>Rol:</label>
+            <select name="roles[]">
+              <option value="PO">Product Owner</option>
+              <option value="SM">Scrum Master</option>
+              <option value="TM">Team Member</option>
+            </select>
+            <span class="borrarSelect">x</span>
+          </div>
+        `;
+    
+        btnMostrarSelects.addEventListener('click', () => {
+          const nuevoSelect = document.createElement('div');
+          nuevoSelect.innerHTML = select1;
+          contenedorSelects.appendChild(nuevoSelect);
+          
+    
+          const btnBorrarSelect = nuevoSelect.querySelector('.borrarSelect');
+          btnBorrarSelect.addEventListener('click', () => {
+            contenedorSelects.removeChild(nuevoSelect);
+          });
+        });
+    </script>
+
+<script>
+    // Agregar controlador de eventos de clic a todas las etiquetas span con la clase "borrarSelect"
+    const spans = document.querySelectorAll('.borrarSelect');
+    spans.forEach(span => {
+        span.addEventListener('click', function() {
+            // Eliminar el elemento padre de la etiqueta span
+            this.parentNode.remove();
+        });
+    });
+</script>
+
+    
+</body>
+</html>

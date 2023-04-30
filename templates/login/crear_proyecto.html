@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Proyecto</title>
+</head>
+<body>
+    <h1>CREAR Proyecto</h1>
+    <form action="/crear_proyecto" method="post">
+    {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required>
+        <br>
+        <label for="descripcion">Descripcion:</label>
+        <input type="text" name="descripcion" id="descripcion" required>
+        <br>
+
+        <button type="button" id="mostrarSelects">Agregar usuarios</button>
+        <div id="contenedorSelects">
+        </div>
+        <br>
+        <br>
+        <button type="submit">Crear proyecto</button>
+    </form>
+    
+
+
+    
+
+    <style>
+      .borrarSelect {
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        background-color: #eee;
+        border: 1px solid #aaa;
+        border-radius: 0.25em;
+        cursor: pointer;
+        margin-left: 0.5em;
+      }
+    </style>
+   
+  <script>
+    const btnMostrarSelects = document.querySelector('#mostrarSelects');
+    const contenedorSelects = document.querySelector('#contenedorSelects');
+
+    const select1 = `
+      <div class="selects">
+        <label>Usuario:</label>
+        <select name="usuarios[]">
+          {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+          {% endfor %}
+        </select>
+        <span class="borrarSelect">x</span>
+      </div>
+    `;
+
+    const select2 = `
+    <label>ROL:</label>
+      <select name="roles[]">
+        <option value="PO">Product Owner</option>
+        <option value="SM">Scrum Master</option>
+        <option value="TM">Team Member</option>
+      </select>
+    `;
+
+    btnMostrarSelects.addEventListener('click', () => {
+      const nuevoSelect1 = document.createElement('div');
+      nuevoSelect1.innerHTML = select1;
+
+      const nuevoSelect2 = document.createElement('div');
+      nuevoSelect2.innerHTML = select2;
+
+      contenedorSelects.appendChild(nuevoSelect1);
+      contenedorSelects.appendChild(nuevoSelect2);
+
+      const btnBorrarSelect = nuevoSelect1.querySelector('.borrarSelect');
+      btnBorrarSelect.addEventListener('click', () => {
+        contenedorSelects.removeChild(nuevoSelect1);
+        contenedorSelects.removeChild(nuevoSelect2);
+      });
+      
+    });
+  </script>
+</body>
+</html>
