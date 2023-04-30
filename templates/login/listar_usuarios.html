@@ -8,6 +8,7 @@
     <title>Listar Usuarios</title>
 </head>
 <body>
+    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
     {% for usuario in usuarios %}
         <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
         <p><strong>Email:</strong> {{ usuario.email }}</p>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Proyectos</title>
+</head>
+<body>
+    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+    {% for proyecto in proyectos %}
+        <p><strong>Nombre:</strong> {{ proyecto.nombre }}</p>
+        <p><strong>Descripcion:</strong> {{ proyecto.descripcion }}</p>
+        <p><strong>Fecha de Creacion:</strong> {{ proyecto.fecha_creacion }}</p>
+        <p><strong>ID:</strong> {{ proyecto.backlog_id }}</p>
+        <ul>
+            {% for usuarioproyecto in proyecto.usuarioproyecto_set.all %}
+                <li>{{ usuarioproyecto.usuario.nombre }} - {{ usuarioproyecto.rol_usuario.tipo_rol }}</li>
+            {% endfor %}
+        </ul>
+        <a href="edicionProyecto/{{proyecto.backlog_id}}" class="boton">Editar</a> &nbsp;&nbsp;
+        <a href="eliminar_proyecto/{{proyecto.backlog_id}}">Eliminar</a>
+    {% endfor %}
+    <br>
+    <br>
+    <button type="submit"><a href="/crear_proyecto" class="boton">CREAR PROYECTO</a></button>
+
+</body>
+</html>
