@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h1>Editar User Story</h1>
+    
+    <form method="post" action="{% url 'editar_us' us_id=user_story.id_user_story %}">
+    {% csrf_token %}
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" value="{{ user_story.nombre }}"><br><br>
+    <label for="descripcion">Descripcion:</label>
+    <textarea id="descripcion" cols="30" rows="7" name="descripcion">{{ user_story.descripcion }}</textarea><br><br>
+    <label for="hecho">Hecho:</label>
+    <textarea id="hecho" name="hecho">{{ user_story.hecho }}</textarea><br><br>
+    <label for="story_points">Story Points:</label>
+    <input type="number" id="story_points" name="story_points" required value="{{ user_story.story_points }}"><br><br>
+    <label for="prioridad">Prioridad:</label>
+    <input type="number" id="prioridad" name="prioridad" required value="{{ user_story.prioridad }}"><br><br>
+    <label for="estado">Estado:</label>
+    <select id="estado" name="estado">
+        <option value="to do" {% if user_story.estado.estado == 'to do' %} selected {% endif %}>To do</option>
+        <option value="doing" {% if user_story.estado.estado == 'doing' %} selected {% endif %}>Doing</option>
+        <option value="done" {% if user_story.estado.estado == 'done' %} selected {% endif %}>Done</option>
+        <option value="cancelled" {% if user_story.estado.estado == 'cancelled' %} selected {% endif %}>Cancelled</option>
+    </select><br><br>
+    <label for="fecha_inicio">Fecha Inicio:</label>
+    <input type="date" id="fecha_inicio" name="fecha_inicio" required value="{{ user_story.fecha_inicio|date:'Y-m-d' }}"><br><br>
+    <label for="fecha_fin">Fecha Fin:</label>
+    <input type="date" id="fecha_fin" name="fecha_fin" required value="{{ user_story.fecha_fin|date:'Y-m-d' }}"><br><br>
+    
+    <label for="usuario_asig">Usuario Asignado:</label>
+    <select name="usuario_asig">
+        <option value="null" {% if user_story.usuario_proyecto is None %}selected{% endif %}>Ninguno</option>
+        {% for usuario_proyecto in usuarios_proyecto %}
+          <option value="{{ usuario_proyecto.id_usu_proy_rol}}" {% if user_story.usuario_proyecto_id == usuario_proyecto.id_usu_proy_rol %}selected{% endif %}>{{ usuario_proyecto.usuario.nombre }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    {% if user_story.sprint is None %}
+      <label for="sprint_asig">Sprint:</label>
+      <select name="sprint_asig" id="sprint_asig">
+        <option value="null">Ninguno</option>
+        {% for sprint in sprints_proyecto %}
+          <option value="{{ sprint.sprint_backlog_id }}" >{{ sprint.nombre }}</option>
+        {% endfor %}
+      </select>
+    {% endif %}
+
+      
+    <br>
+    <br>
+    <input type="submit" value="Guardar">
+    </form>
+
+ 
+
+
+<script>
+    const btnMostrarSelects = document.querySelector('#mostrarSelects');
+    const contenedorSelects = document.querySelector('#contenedorSelects');
+
+    const select1 = `
+      <div class="selects">
+        <label>Usuario:</label>
+        <select name="usuarios[]">
+          {% for usuarioProy in usuarios_proyecto %}
+            <option value="{{ usuarioProy.usuario.id }}">{{ usuarioProy.usuario.nombre }}</option>
+          {% endfor %}
+        </select>
+        <span class="borrarSelect">x</span>
+      </div>
+    `;
+
+
+
+    btnMostrarSelects.addEventListener('click', () => {
+      const nuevoSelect1 = document.createElement('div');
+      nuevoSelect1.innerHTML = select1;
+
+
+      contenedorSelects.appendChild(nuevoSelect1);
+
+
+      const btnBorrarSelect = nuevoSelect1.querySelector('.borrarSelect');
+      btnBorrarSelect.addEventListener('click', () => {
+        contenedorSelects.removeChild(nuevoSelect1);
+      });
+      
+    });
+  </script>
+  <script>
+    // Agregar controlador de eventos de clic a todas las etiquetas span con la clase "borrarSelect"
+    const spans = document.querySelectorAll('.borrarSelect');
+    spans.forEach(span => {
+        span.addEventListener('click', function() {
+            // Eliminar el elemento padre de la etiqueta span
+            this.parentNode.remove();
+        });
+    });
+</script>
+</body>
+</html>

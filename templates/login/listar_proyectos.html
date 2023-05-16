@@ -9,10 +9,12 @@
 </head>
 <body>
     <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+
     {% for proyecto in proyectos %}
         <p><strong>Nombre:</strong> {{ proyecto.nombre }}</p>
         <p><strong>Descripcion:</strong> {{ proyecto.descripcion }}</p>
         <p><strong>Fecha de Creacion:</strong> {{ proyecto.fecha_creacion }}</p>
+        <p><strong>Fecha Fin:</strong> {{ proyecto.fecha_fin }}</p>
         <p><strong>ID:</strong> {{ proyecto.backlog_id }}</p>
         <ul>
             {% for usuarioproyecto in proyecto.usuarioproyecto_set.all %}
@@ -20,7 +22,8 @@
             {% endfor %}
         </ul>
         <a href="edicionProyecto/{{proyecto.backlog_id}}" class="boton">Editar</a> &nbsp;&nbsp;
-        <a href="eliminar_proyecto/{{proyecto.backlog_id}}">Eliminar</a>
+        <a href="eliminar_proyecto/{{proyecto.backlog_id}}">Eliminar</a> &nbsp;&nbsp;
+        <a href="listar_sprint/{{proyecto.backlog_id}}">Sprints</a>
     {% endfor %}
     <br>
     <br>

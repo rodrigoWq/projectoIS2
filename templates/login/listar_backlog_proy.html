@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar User Stories</title>
+</head>
+<body>
+    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+    <h1>User Stories</h1>
+  <div style="text-align: center;">
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre&nbsp;&nbsp;</th>
+          <th>Usuario Asignado&nbsp;&nbsp;</th>
+          <th>Descripción</th>
+          <th>Hecho</th>
+          <th>Story Points&nbsp;&nbsp;</th>
+          <th>Prioridad&nbsp;&nbsp;</th>
+          <th>Estado&nbsp;&nbsp;</th>
+          <th>Fecha Inicio&nbsp;&nbsp;</th>
+          <th>Fecha Fin&nbsp;&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user_story in user_stories %}
+          <tr>
+            <td>{{ user_story.nombre }}</td>
+            <td>{{ user_story.usuario_proyecto.usuario.nombre }}</td>
+            <td>{{ user_story.descripcion }}&nbsp;&nbsp;</td>
+            <td>{{ user_story.hecho }}&nbsp;&nbsp;</td>
+            <td>{{ user_story.story_points }}&nbsp;&nbsp;</td>
+            <td>{{ user_story.prioridad }}&nbsp;&nbsp;</td>
+            <td>{{ user_story.estado.estado }}&nbsp;&nbsp;</td>
+            <td>{{ user_story.fecha_inicio|date:'d/m/Y' }}&nbsp;&nbsp;</td>
+            <td>{{ user_story.fecha_fin|date:'d/m/Y' }}&nbsp;&nbsp;</td>
+            {% if user.id == 1 or user.id == user_story.usuario_proyecto.usuario.id or user.id == sm  %}
+            <td><a href="{% url 'editar_us' us_id=user_story.id_user_story %}">Editar</a>&nbsp;&nbsp;</td> 
+            <td><a href="{% url 'eliminar_us' us_id=user_story.id_user_story %}">Eliminar</a></td>
+            {% endif %}
+            
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <br>
+
+  <button type="submit"><a href="{% url 'crear_us_backlog' proyect_id=proyect_id %}" class="boton">CREAR USER STORY</a></button>
+    
+</body>
+</html>

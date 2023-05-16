@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Sprints</title>
+</head>
+<body>
+    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+    <h1>Lista los sprints asociados al proyecto "{{ sprints.0.proyecto.nombre }}"</h1>
+    <table>
+        <thead>
+          <tr>
+           
+            <th>Nombre</th>
+            <th>Fecha de Inicio Prevista &nbsp;&nbsp;</th>
+            <th>Fecha de Fin Prevista</th>
+            <th>Fecha de Inicio Real &nbsp;&nbsp;</th>
+            <th>Fecha de Fin Real &nbsp;&nbsp;</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          {% for sprint in sprints %}
+          <tr>
+           
+            <td>{{ sprint.nombre }}&nbsp;&nbsp;</td>
+            <td>{{ sprint.fecha_inicio_prevista }}&nbsp;</td>
+            <td>{{ sprint.fecha_fin_prevista }}&nbsp;&nbsp;</td>
+            <td>{{ sprint.fecha_inicio_real|date:'d/m/Y' }}&nbsp;&nbsp;</td>
+            <td>{{ sprint.fecha_fin_real|date:'d/m/Y' }}&nbsp;&nbsp;</td>
+            <td><a href="{% url 'listarUSdelSprint' sprint_id=sprint.sprint_backlog_id%}">User Stories</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><a href="{% url 'edicionSprint' sprint_id=sprint.sprint_backlog_id %}">Editar</a>&nbsp;&nbsp;</td> 
+            <td><a href="{% url 'eliminar_sprint' sprint_id=sprint.sprint_backlog_id %}">Eliminar</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <button type="submit"><a href="{% url 'creacionSprint' proyecto_id=proyecto_id %}" class="boton">CREAR SPRINT</a></button>
+      <button type="submit"><a href="{% url 'listar_backlog_proy' proyect_id=proyecto_id %}" class="boton">Backlog</a></button>
+</body>
+</html>
