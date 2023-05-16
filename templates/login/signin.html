@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio de sesion</title>
     <link rel="stylesheet" href="{% static 'css/styleSignin.css' %}">
 </head>
 <body>
@@ -17,19 +17,20 @@
     </button>
     </div>
     {% endfor %}
-
-    <h1>Sign IN</h1>
-    <form action="/signin" method="post">
-    {% csrf_token %}
-        <label for="">Username</label>
-        <input type="text" id="username" name="username" placeholder="Escribe tu usuario" Required>
-        <br>
-        <label for="">Password</label>
-        <input type="password" id="pass1" name="pass1" placeholder="Escribe tu password" Required>
-        <br>
-        
-         
-        <button type="submit">Sign In</button>
-    </form>
+    <div class="inicio_sesion">
+        <h1>Inicio Sesion</h1>
+        <form action="/signin" method="post">
+        {% csrf_token %}
+            <label for="">Usuario</label>
+            <input type="text" id="username" name="username" placeholder="Escribe tu usuario" Required>
+            <br>
+            <label for="">Contraseña</label>
+            <input type="password" id="pass1" name="pass1" placeholder="Escribe tu contraseña" Required>
+            <br>
+            
+            
+            <button type="submit" class = "boton">enviar</button>
+        </form>
+    <div/>
 </body>
 </html>

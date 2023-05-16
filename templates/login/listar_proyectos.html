@@ -6,8 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Proyectos</title>
+    <link rel="stylesheet" href="/static/css/style_crud.css">
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>Proyectos</h1>
+        
     <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
 
     {% for proyecto in proyectos %}
@@ -28,6 +33,6 @@
     <br>
     <br>
     <button type="submit"><a href="/crear_proyecto" class="boton">CREAR PROYECTO</a></button>
-
+</div>
 </body>
 </html>

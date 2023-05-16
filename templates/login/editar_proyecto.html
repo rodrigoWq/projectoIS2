@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Proyecto</title>
+    <link rel="stylesheet" href="/static/css/style_crud.css">
 </head>
 <body>
+  <div class="container">
     <h1>Editar Proyecto</h1>
     <form action="/editar_proyecto" method="post">
         {% csrf_token %}
@@ -46,7 +48,7 @@
         <br>
         <button type="submit">Guardar cambios</button>
     </form>
-
+    <div/>
 
     <style>
         .borrarSelect {
