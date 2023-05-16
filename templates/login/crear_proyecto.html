@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/css/style_crud.css">
     <title>Crear Proyecto</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<<<<<<< Updated upstream
     {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
             <strong>Mensaje:</strong> {{ message }}
@@ -29,5 +31,70 @@
             <button type="submit" class="btn btn-primary">Crear Proyecto</button>
         </form>
     </div>
+=======
+  <div class="container">
+    <h1>Crear Proyecto</h1>
+    <form action="/crear_proyecto" method="post">
+    {% csrf_token %}
+        <label for="nombre">Nombre:</label><br/>
+        <input type="text" name="nombre" id="nombre" required>
+        <br>
+        <label for="descripcion">Descripcion:</label><br/>
+        <input type="text" name="descripcion" id="descripcion" required>
+        <br>
+
+        <button type="button" id="mostrarSelects">Agregar usuarios</button>
+        <div id="contenedorSelects">
+        </div>
+        <br>
+        <br>
+        <button type="submit">Crear proyecto</button>
+    </form>
+  </div>
+
+    <script>
+      const btnMostrarSelects = document.querySelector('#mostrarSelects');
+      const contenedorSelects = document.querySelector('#contenedorSelects');
+
+      const select1 = `
+        <div class="selects">
+          <label>Usuario:</label>
+          <select name="usuarios[]">
+            {% for usuario in usuarios %}
+              <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+            {% endfor %}
+          </select>
+          <span class="borrarSelect">x</span>
+        </div>
+      `;
+
+      const select2 = `
+      <label>ROL:</label>
+        <select name="roles[]">
+          <option value="PO">Product Owner</option>
+          <option value="SM">Scrum Master</option>
+          <option value="TM">Team Member</option>
+        </select>
+      `;
+
+      btnMostrarSelects.addEventListener('click', () => {
+        const nuevoSelect1 = document.createElement('div');
+        nuevoSelect1.innerHTML = select1;
+
+        const nuevoSelect2 = document.createElement('div');
+        nuevoSelect2.innerHTML = select2;
+
+        contenedorSelects.appendChild(nuevoSelect1);
+        contenedorSelects.appendChild(nuevoSelect2);
+
+        const btnBorrarSelect = nuevoSelect1.querySelector('.borrarSelect');
+        btnBorrarSelect.addEventListener('click', () => {
+          contenedorSelects.removeChild(nuevoSelect1);
+          contenedorSelects.removeChild(nuevoSelect2);
+        });
+        
+      });
+    </script>
+>>>>>>> Stashed changes
 </body>
 </html>

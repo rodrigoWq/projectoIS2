@@ -1,0 +1,98 @@
+/* Estilos generales */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f5f7fa;
+}
+
+/* Estilos del título */
+h1 {
+	color: #0077b6;
+}
+
+/* Estilos de los campos del formulario */
+input[type="text"], 
+input[type="email"],
+input[type="tel"],
+select {
+	background-color: #e1f1f7;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	padding: 0.5em;
+	margin-bottom: 1em;
+}
+
+/* Estilos del botón de envío */
+button[type="submit"] {
+	background-color: #0077b6;
+	color: #fff;
+	border: none;
+	padding: 0.5em 1em;
+	border-radius: 0.25em;
+	cursor: pointer;
+}
+
+/* Estilos del botón de envío al pasar el cursor sobre él */
+button[type="submit"]:hover {
+	background-color: #023e8a;
+}
+
+/* Estilos del botón "Agregar usuarios" */
+#mostrarSelects {
+	background-color: #eee;
+	border: 1px solid #aaa;
+	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
+	cursor: pointer;
+}
+
+/* Estilos de los selects y el botón de borrar */
+.selects {
+	margin-bottom: 1em;
+}
+
+.borrarSelect {
+	display: inline-block;
+	padding: 0.25em 0.5em;
+	background-color: #eee;
+	border: 1px solid #aaa;
+	border-radius: 0.25em;
+	cursor: pointer;
+	margin-left: 0.5em;
+}
+
+/* Estilos de las alertas */
+.alerta {
+	padding: 1em;
+	margin-bottom: 1em;
+	color: #fff;
+	font-weight: bold;
+	border-radius: 0.25em;
+	text-align: center;
+}
+
+.alerta-exito {
+	background-color: #0077B6;
+}
+
+.alerta-informacion {
+	background-color: #48CAE4;
+}
+
+.alerta-advertencia {
+	background-color: #F8B400;
+}
+
+.alerta-peligro {
+	background-color: #F58220;
+}
+
+/* Estilos del contenedor */
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}

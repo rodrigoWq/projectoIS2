@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Proyecto</title>
+    <link rel="stylesheet" href="/static/css/style_crud.css">
 </head>
 <body>
-    <h1>Editar proyecto "{{ proyecto.nombre }}"</h1>
-    <form action="/editar_proyecto/{{ proyecto.id }}" method="post">
+  <div class="container">
+    <h1>Editar Proyecto</h1>
+    <form action="/editar_proyecto" method="post">
         {% csrf_token %}
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="{{ proyecto.nombre }}" required>
@@ -17,5 +19,66 @@
         <br>
         <button type="submit">Guardar cambios</button>
     </form>
+    <div/>
+
+    <style>
+        .borrarSelect {
+          display: inline-block;
+          padding: 0.25em 0.5em;
+          background-color: #eee;
+          border: 1px solid #aaa;
+          border-radius: 0.25em;
+          cursor: pointer;
+          margin-left: 0.5em;
+        }
+      </style>
+    
+    <script>
+        const btnMostrarSelects = document.querySelector('#mostrarSelects');
+        const contenedorSelects = document.querySelector('#contenedorSelects');
+    
+        const select1 = `
+          <div class="selects">
+            <label>Usuario:</label>
+            <select name="usuarios[]">
+              {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+              {% endfor %}
+            </select>
+            <label>Rol:</label>
+            <select name="roles[]">
+              <option value="PO">Product Owner</option>
+              <option value="SM">Scrum Master</option>
+              <option value="TM">Team Member</option>
+            </select>
+            <span class="borrarSelect">x</span>
+          </div>
+        `;
+    
+        btnMostrarSelects.addEventListener('click', () => {
+          const nuevoSelect = document.createElement('div');
+          nuevoSelect.innerHTML = select1;
+          contenedorSelects.appendChild(nuevoSelect);
+          
+    
+          const btnBorrarSelect = nuevoSelect.querySelector('.borrarSelect');
+          btnBorrarSelect.addEventListener('click', () => {
+            contenedorSelects.removeChild(nuevoSelect);
+          });
+        });
+    </script>
+
+<script>
+    // Agregar controlador de eventos de clic a todas las etiquetas span con la clase "borrarSelect"
+    const spans = document.querySelectorAll('.borrarSelect');
+    spans.forEach(span => {
+        span.addEventListener('click', function() {
+            // Eliminar el elemento padre de la etiqueta span
+            this.parentNode.remove();
+        });
+    });
+</script>
+
+    
 </body>
 </html>

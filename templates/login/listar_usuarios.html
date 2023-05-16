@@ -6,8 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Usuarios</title>
+    <link rel="stylesheet" href="static/css/style_crud.css">
 </head>
 <body>
+<<<<<<< Updated upstream
+=======
+    <div class="container">
+    <h1>LISTADO DE USUARIOS</h1>
+    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+>>>>>>> Stashed changes
     {% for usuario in usuarios %}
         <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
         <p><strong>Email:</strong> {{ usuario.email }}</p>
@@ -19,6 +26,6 @@
     <br>
     <br>
     <button type="submit"><a href="/crear_usuario" class="boton">CREAR USUARIO</a></button>
-
+    <div/>
 </body>
 </html>

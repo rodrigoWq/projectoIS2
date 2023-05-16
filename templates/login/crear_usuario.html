@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creacion de usuarios</title>
+    <link rel="stylesheet" href="static/css/style_crud.css">
 </head>
 <body>
     {% for  message in messages %}
@@ -15,13 +16,17 @@
     </button>
     </div>
     {% endfor %}
-
-    <h1>CREAR USUARIO</h1>
-    <form action="/crear_usuario" method="post">
-    {% csrf_token %}
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" required>
+    <div class="container">
+        <h1>Crear Usuario</h1>
+        <form action="/crear_usuario" method="post">
+        {% csrf_token %}
+            <label for="nombre">Nombre:</label><br/>
+            <input type="text" name="nombre" id="nombre" required><br/>
+            
+            <label for="email">Email:</label><br/>
+            <input type="email" name="email" id="email" required><br/>
         
+<<<<<<< Updated upstream
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required>
         
@@ -34,5 +39,13 @@
     
         <button type="submit">Crear usuario</button>
     </form>
+=======
+            <label for="telefono">Teléfono:</label><br/>
+            <input type="tel" name="telefono" id="telefono" required><br/>
+        
+            <button type="submit">Crear usuario</button>
+        </form>
+    </div>
+>>>>>>> Stashed changes
 </body>
 </html>
