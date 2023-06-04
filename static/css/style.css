@@ -88,3 +88,15 @@ button[type="submit"]:hover {
 	.alert-danger {
 	background-color: #F58220;
 	}
+
+.kanban-board.columns-inline {
+display: flex;
+}
+
+.column {
+flex: 1;
+margin: 10px;
+padding: 10px;
+border: 1px solid #ccc;
+}
+	

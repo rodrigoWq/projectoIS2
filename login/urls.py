@@ -29,4 +29,5 @@ urlpatterns = [
     path('editar_us/<us_id>', views.editar_us, name="editar_us"),
     path('volver_home', views.volver_home, name="volver_home"),
     path('editar_usuario', views.editar_usuario, name="editar_usuario"),
+    path('kanban_board/<sprint_id>',views.kanban_board, name="kanban_board"),
 ]

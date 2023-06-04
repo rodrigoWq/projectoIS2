@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="kanban-board columns-inline">
+        <div class="column">
+            <h3>ToDo</h3>
+            {% for story in todo_stories %}
+                <div class="user-story">
+                    <span>{{ story.id_user_story }}</span>
+                    <span>{{ story.nombre }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="column">
+            <h3>Doing</h3>
+            {% for story in doing_stories %}
+                <div class="user-story">
+                    <span>{{ story.id_user_story }}</span>
+                    <span>{{ story.nombre }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="column">
+            <h3>Done</h3>
+            {% for story in done_stories %}
+                <div class="user-story">
+                    <span>{{ story.id_user_story }}</span>
+                    <span>{{ story.nombre }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+</body>
+</html>

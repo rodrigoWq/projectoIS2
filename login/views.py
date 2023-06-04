@@ -475,3 +475,19 @@ def actualizar_fecha_fin_proyecto(proyecto_id):
     if user_stories_proyecto.filter(estado__estado='done').count() == user_stories_proyecto.count():
         proyecto.fecha_fin = datetime.date.today()
         proyecto.save()
+
+def kanban_board(request,sprint_id):
+    # Obtener todas las User Stories
+    sprint = get_object_or_404(Sprint, sprint_backlog_id=sprint_id)
+    user_stories = UserStories.objects.filter(sprint=sprint)
+    
+    # Agrupar por estado
+    todo_stories = user_stories.filter(estado__estado='to do')
+    doing_stories = user_stories.filter(estado__estado='doing')
+    done_stories = user_stories.filter(estado__estado='done')
+    # Renderizar la plantilla con los datos
+    return render(request, "login/kanban_board.html", {
+        'todo_stories': todo_stories,
+        'doing_stories': doing_stories,
+        'done_stories': done_stories
+    })
