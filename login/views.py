@@ -1,4 +1,6 @@
 import datetime
+import json
+from pyexpat import model
 import random
 import uuid
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Estado, Rol, Sprint, UserStories, Usuario,Proyecto, UsuarioProyecto
 from django.db.models import Prefetch
 from django.urls import reverse
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -150,6 +153,12 @@ def crear_us_backlog(request,proyect_id):
         estado_id = request.POST.get('estado')
         fecha_inicio = request.POST.get('fecha_inicio')
         fecha_fin = request.POST.get('fecha_fin')
+
+        if not fecha_fin:
+            fecha_fin = None
+        if not fecha_inicio:
+            fecha_inicio = None  
+            
         estado = get_object_or_404(Estado, estado=estado_id)
         proyect = get_object_or_404(Proyecto,backlog_id=proyect_id)
         usuarios_seleccionados = request.POST.getlist('usuarios[]')
@@ -211,6 +220,13 @@ def crear_us(request,sprint_id):
         estado_id = request.POST.get('estado')
         fecha_inicio = request.POST.get('fecha_inicio')
         fecha_fin = request.POST.get('fecha_fin')
+
+
+        if not fecha_fin:
+            fecha_fin = None
+        if not fecha_inicio:
+            fecha_inicio = None    
+
         sprint = get_object_or_404(Sprint,sprint_backlog_id=sprint_id)
         estado = get_object_or_404(Estado, estado=estado_id)
         proyect = get_object_or_404(Proyecto,backlog_id=sprint.proyecto.backlog_id)
@@ -380,8 +396,16 @@ def editar_us(request, us_id):
         user_story.story_points = request.POST['story_points']
         user_story.prioridad = request.POST['prioridad']
         estado_id = request.POST.get('estado')
-        user_story.fecha_inicio = request.POST['fecha_inicio']
-        user_story.fecha_fin = request.POST['fecha_fin']
+        fecha_inicio = request.POST['fecha_inicio']
+        fecha_fin = request.POST['fecha_fin']
+        user_story.fecha_fin = fecha_fin
+        user_story.fecha_inicio = fecha_inicio
+        if not fecha_fin:
+            user_story.fecha_fin = None
+        if not fecha_inicio:
+            user_story.fecha_inicio = None
+        
+
         usuario_proyecto_id = request.POST.get('usuario_asig')
         estadoActual = get_object_or_404(Estado,estado=estado_id)
         user_story.estado = estadoActual
@@ -491,3 +515,65 @@ def kanban_board(request,sprint_id):
         'doing_stories': doing_stories,
         'done_stories': done_stories
     })
+
+def json_date_handler(obj):
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
+    else:
+        raise TypeError("Object of type {0} is not JSON serializable".format(type(obj)))
+
+
+def burndown_chart(request,sprint_id):
+
+    # Obtener el sprint seleccionado
+    sprint = get_object_or_404(Sprint, sprint_backlog_id=sprint_id)
+    proyecto_id = sprint.proyecto.backlog_id
+    proyecto = get_object_or_404(Proyecto, backlog_id=proyecto_id )
+    # Filtrar las US por proyecto y sprint
+    user_stories = UserStories.objects.filter(proyect__backlog_id=proyecto_id, sprint__sprint_backlog_id=sprint_id)
+    sprints = Sprint.objects.filter(proyecto=proyecto)
+    # Calcular la suma de los story points planificados para el sprint
+    total_story_points = user_stories.aggregate(Sum('story_points'))['story_points__sum']
+    if total_story_points:
+        # Obtener las fechas de inicio y fin del sprint
+        fecha_inicio = sprint.fecha_inicio_prevista.date()
+        fecha_fin = sprint.fecha_fin_prevista.date()
+
+        # Calcular el número de días del sprint
+        duracion_sprint = (fecha_fin - fecha_inicio).days + 1
+
+        # Calcular los story points completados por día
+        story_points_completados = []
+        fecha_actual = fecha_inicio
+        for i in range(duracion_sprint):
+            story_points = user_stories.filter(estado__estado='done', fecha_fin=fecha_actual).aggregate(Sum('story_points'))['story_points__sum']
+            if story_points is None:
+                story_points = 0
+            story_points_completados.append(story_points)
+            fecha_actual += datetime.timedelta(days=1)
+
+        # Calcular la lista de puntos restantes por día
+        puntos_restantes = [total_story_points]
+        for i in range(1, duracion_sprint):
+            puntos_restantes.append(puntos_restantes[i-1] - story_points_completados[i])
+
+        # Crear la lista de puntos ideales (diagonal)
+        puntos_ideales = [total_story_points - (total_story_points / (duracion_sprint-1)) * i for i in range(duracion_sprint-1)]
+        puntos_ideales.append(0)
+        # Preparar los datos para enviar a la plantilla
+        data = {
+            'fechas': [fecha_inicio + datetime.timedelta(days=i) for i in range(duracion_sprint)],
+            'puntos_ideales': puntos_ideales,
+            'puntos_restantes': puntos_restantes,
+        }
+        
+        data_json = json.dumps(data,default=json_date_handler)
+
+        context = {
+            'data_json': data_json,
+            'sprints': sprints,
+        }
+
+        return render(request, 'login/burndown_chart.html', context)
+    else:
+        return redirect('listarUSdelSprint', sprint_id = sprint_id)

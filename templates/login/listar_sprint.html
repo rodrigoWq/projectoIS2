@@ -31,7 +31,7 @@
             <td>{{ sprint.fecha_inicio_real|date:'d/m/Y' }}&nbsp;&nbsp;</td>
             <td>{{ sprint.fecha_fin_real|date:'d/m/Y' }}&nbsp;&nbsp;</td>
             <td><a href="{% url 'listarUSdelSprint' sprint_id=sprint.sprint_backlog_id%}">User Stories</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><a href="{% url 'kanban_board' sprint_id=sprint.sprint_backlog_id%}">Tablero</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            
             <td><a href="{% url 'edicionSprint' sprint_id=sprint.sprint_backlog_id %}">Editar</a>&nbsp;&nbsp;</td> 
             <td><a href="{% url 'eliminar_sprint' sprint_id=sprint.sprint_backlog_id %}">Eliminar</a></td>
           </tr>

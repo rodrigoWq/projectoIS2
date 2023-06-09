@@ -38,9 +38,9 @@
         <option value="cancelled" {% if user_story.estado.estado == 'cancelled' %} selected {% endif %}>Cancelled</option>
     </select><br><br>
     <label for="fecha_inicio">Fecha Inicio:</label>
-    <input type="date" id="fecha_inicio" name="fecha_inicio" required value="{{ user_story.fecha_inicio|date:'Y-m-d' }}"><br><br>
+    <input type="date" id="fecha_inicio" name="fecha_inicio"  value="{{ user_story.fecha_inicio|date:'Y-m-d' }}"><br><br>
     <label for="fecha_fin">Fecha Fin:</label>
-    <input type="date" id="fecha_fin" name="fecha_fin" required value="{{ user_story.fecha_fin|date:'Y-m-d' }}"><br><br>
+    <input type="date" id="fecha_fin" name="fecha_fin"  value="{{ user_story.fecha_fin|date:'Y-m-d' }}"><br><br>
     
     <label for="usuario_asig">Usuario Asignado:</label>
     <select name="usuario_asig">

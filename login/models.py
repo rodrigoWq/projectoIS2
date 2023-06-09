@@ -65,8 +65,8 @@ class UserStories(models.Model):
     story_points = models.IntegerField(null=True)
     prioridad = models.IntegerField(null=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
-    fecha_inicio = models.DateField(null=True)
-    fecha_fin = models.DateField(null=True)
+    fecha_inicio = models.DateField(null=True, blank=True)
+    fecha_fin = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.nombre

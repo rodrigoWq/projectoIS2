@@ -49,7 +49,8 @@
   <br>
   <br>
   <button type="submit"><a href="{% url 'crear_us' sprint_id=sprint_id %}" class="boton">CREAR USER STORY</a></button>
-
+  <button><a href="{% url 'kanban_board' sprint_id=sprint_id %}">Tablero</a></button>
+  <button><a href="{% url 'burndown_chart' sprint_id=sprint_id %}">burndown_chart</a></button>
     
 </body>
 </html>

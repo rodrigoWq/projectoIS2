@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Burndown Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Estilos para el gráfico */
+        #chartContainer {
+            width: 800px;
+            height: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+    <h1>Burndown Chart</h1>
+
+    <form id="sprintForm" action="#" method="get">
+    {% csrf_token %}
+        <label for="sprintSelect">Seleccione un Sprint:</label>
+        <select id="sprintSelect" name="sprint">
+            <option value="" disabled selected>Elegir sprint</option>
+            <!-- Agrega las opciones de selección de sprint -->
+            {% for sprint in sprints %}
+                <option value="{{ sprint.sprint_backlog_id }}">{{ sprint.nombre }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Mostrar">
+    </form>
+
+    <div id="chartContainer">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <script>
+        // Obtiene los datos pasados desde la vista
+        var data = JSON.parse('{{ data_json|safe }}');
+
+        // Crea el gráfico utilizando Chart.js
+        var ctx = document.getElementById('chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.fechas,
+                datasets: [
+                    {
+                        label: 'Puntos Ideales',
+                        data: data.puntos_ideales,
+                        borderColor: 'green',
+                        fill: false
+                    },
+                    {
+                        label: 'Puntos Restantes',
+                        data: data.puntos_restantes,
+                        borderColor: 'red',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Fechas'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Puntos'
+                        },
+                        suggestedMin: 0 // Asegura que el eje y comience en 0
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        // Escucha el evento de envío del formulario
+        document.getElementById('sprintForm').addEventListener('submit', function(e) {
+        // Evita que se recargue la página
+        e.preventDefault();
+
+        // Obtiene el valor seleccionado del sprint
+        var selectedSprint = document.getElementById('sprintSelect').value;
+        if ( selectedSprint !== '') {
+        this.action = '/burndown_chart/' + selectedSprint;
+        this.submit();
+        } else {
+        // Muestra una alerta o realiza alguna otra acción si el valor es nulo o vacío
+        alert('Por favor, seleccione un sprint válido');
+         }
+    });
+
+    </script>
+</body>
+</html>
