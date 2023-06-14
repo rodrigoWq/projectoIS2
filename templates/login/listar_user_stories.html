@@ -15,6 +15,7 @@
         <tr>
           <th>Nombre&nbsp;&nbsp;</th>
           <th>Usuario Asignado&nbsp;&nbsp;</th>
+          <th>Rol&nbsp;&nbsp;</th>
           <th>Descripción</th>
           <th>Hecho</th>
           <th>Story Points&nbsp;&nbsp;</th>
@@ -29,6 +30,7 @@
           <tr>
             <td>{{ user_story.nombre }}</td>
             <td>{{ user_story.usuario_proyecto.usuario.nombre }}</td>
+            <td>{{ user_story.usuario_proyecto.rol_usuario.tipo_rol }}&nbsp;&nbsp;</td>
             <td>{{ user_story.descripcion }}&nbsp;&nbsp;</td>
             <td>{{ user_story.hecho }}&nbsp;&nbsp;</td>
             <td>{{ user_story.story_points }}&nbsp;&nbsp;</td>

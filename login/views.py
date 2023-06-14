@@ -370,6 +370,11 @@ def edicionSprint(request, sprint_id):
         sprint.nombre = request.POST.get('nombre')
         sprint.fecha_inicio_real = request.POST.get('fecha_inicio_real')
         sprint.fecha_fin_real = request.POST.get('fecha_fin_real')
+
+        if not sprint.fecha_inicio_real:
+            sprint.fecha_inicio_real = None
+        if not sprint.fecha_fin_real:
+            sprint.fecha_fin_real = None    
         # Actualiza el objeto Sprint en la base de datos
         sprint.save()
         return redirect('listar_sprint', proyecto_id=sprint.proyecto.backlog_id)

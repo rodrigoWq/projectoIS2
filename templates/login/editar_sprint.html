@@ -11,9 +11,9 @@
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" value="{{ sprint.nombre }}"><br><br>
       <label for="fecha_inicio_real">Fecha de inicio Real:</label>
-      <input type="date" id="fecha_inicio_real" name="fecha_inicio_real" value="{{ sprint.fecha_inicio_real|date:'Y-m-d' }}" required><br><br>
+      <input type="date" id="fecha_inicio_real" name="fecha_inicio_real" value="{{ sprint.fecha_inicio_real|date:'Y-m-d' }}" ><br><br>
       <label for="fecha_fin_real">Fecha de fin Real:</label>
-      <input type="date" id="fecha_fin_real" name="fecha_fin_real" value="{{ sprint.fecha_fin_real|date:'Y-m-d' }}" required><br><br>
+      <input type="date" id="fecha_fin_real" name="fecha_fin_real" value="{{ sprint.fecha_fin_real|date:'Y-m-d' }}" ><br><br>
       <input type="submit" value="Guardar cambios">
     </form>
   </body>
