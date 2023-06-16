@@ -26,12 +26,12 @@
         {% for usuarioproyecto in proyecto.usuarioproyecto_set.all %}
         <div id="usuariosProyectSelects">
  
-            <select name="usuarios[]">
+            <select name="usuarios[]" class="custom-select">
                 {% for usuario in usuarios %}
                     <option value="{{ usuario.id }}" {% if usuario.nombre == usuarioproyecto.usuario.nombre %}selected{% endif %}>{{ usuario.nombre }}</option>
                 {% endfor %}
             </select>
-            <select name="roles[]">
+            <select name="roles[]" class="custom-select">
                 <option value="PO" {% if usuarioproyecto.rol_usuario.tipo_rol == 'PO' %}selected{% endif %}>Product Owner</option>
                 <option value="SM" {% if usuarioproyecto.rol_usuario.tipo_rol == 'SM' %}selected{% endif %}>Scrum Master</option>
                 <option value="TM" {% if usuarioproyecto.rol_usuario.tipo_rol == 'TM' %}selected{% endif %}>Team Member</option>
@@ -51,6 +51,21 @@
     <div/>
 
     <style>
+        .custom-select {
+          display: inline-block;
+          padding: 0.375rem 0.75rem;
+          margin-bottom: 0;
+          font-size: 1rem;
+          font-weight: 400;
+          line-height: 1.5;
+          color: #212529;
+          background-color: #fff;
+          background-clip: padding-box;
+          border: 1px solid #ced4da;
+          border-radius: 0.25rem;
+          transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
         .borrarSelect {
           display: inline-block;
           padding: 0.25em 0.5em;
@@ -60,7 +75,7 @@
           cursor: pointer;
           margin-left: 0.5em;
         }
-      </style>
+    </style>
     
     <script>
         const btnMostrarSelects = document.querySelector('#mostrarSelects');
@@ -69,13 +84,13 @@
         const select1 = `
           <div class="selects">
             <label>Usuario:</label>
-            <select name="usuarios[]">
+            <select name="usuarios[]" class="custom-select">
               {% for usuario in usuarios %}
                 <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
               {% endfor %}
             </select>
             <label>Rol:</label>
-            <select name="roles[]">
+            <select name="roles[]" class="custom-select">
               <option value="PO">Product Owner</option>
               <option value="SM">Scrum Master</option>
               <option value="TM">Team Member</option>
@@ -97,17 +112,16 @@
         });
     </script>
 
-<script>
-    // Agregar controlador de eventos de clic a todas las etiquetas span con la clase "borrarSelect"
-    const spans = document.querySelectorAll('.borrarSelect');
-    spans.forEach(span => {
-        span.addEventListener('click', function() {
-            // Eliminar el elemento padre de la etiqueta span
-            this.parentNode.remove();
+    <script>
+        // Agregar controlador de eventos de clic a todas las etiquetas span con la clase "borrarSelect"
+        const spans = document.querySelectorAll('.borrarSelect');
+        spans.forEach(span => {
+            span.addEventListener('click', function() {
+                // Eliminar el elemento padre de la etiqueta span
+                this.parentNode.remove();
+            });
         });
-    });
-</script>
-
+    </script>
     
 </body>
 </html>

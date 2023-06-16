@@ -12,17 +12,22 @@
     <div class="container">
     <h1>LISTADO DE USUARIOS</h1>
     <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
-    {% for usuario in usuarios %}
-        <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
-        <p><strong>Email:</strong> {{ usuario.email }}</p>
-        <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
-        <p><strong>ID:</strong> {{ usuario.id }}</p>
-        <a href="edicionUsuario/{{usuario.id}}" class="boton">Editar</a> &nbsp;&nbsp;
-        <a href="eliminar_usuario/{{usuario.id}}">Eliminar</a>
-    {% endfor %}
+    <div class="user-box">
+        {% for usuario in usuarios %}
+        <div class="user-container">
+            <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+            <p><strong>Email:</strong> {{ usuario.email }}</p>
+            <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+            <p><strong>ID:</strong> {{ usuario.id }}</p>
+        
+            <a href="edicionUsuario/{{usuario.id}}" class="boton">Editar</a> &nbsp;&nbsp;
+            <a href="eliminar_usuario/{{usuario.id}}">Eliminar</a>
+        </div>
+        {% endfor %}
+    </div>
     <br>
     <br>
     <button type="submit"><a href="/crear_usuario" class="boton">CREAR USUARIO</a></button>
-    <div/>
+</div>
 </body>
 </html>

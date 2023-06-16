@@ -13,26 +13,34 @@
         <div class="header">
             <h1>Proyectos</h1>
         
-    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+            <button type="submit" class="boton"><a href="/volver_home" >Volver</a></button>
 
-    {% for proyecto in proyectos %}
-        <p><strong>Nombre:</strong> {{ proyecto.nombre }}</p>
-        <p><strong>Descripcion:</strong> {{ proyecto.descripcion }}</p>
-        <p><strong>Fecha de Creacion:</strong> {{ proyecto.fecha_creacion }}</p>
-        <p><strong>Fecha Fin:</strong> {{ proyecto.fecha_fin }}</p>
-        <p><strong>ID:</strong> {{ proyecto.backlog_id }}</p>
-        <ul>
-            {% for usuarioproyecto in proyecto.usuarioproyecto_set.all %}
-                <li>{{ usuarioproyecto.usuario.nombre }} - {{ usuarioproyecto.rol_usuario.tipo_rol }}</li>
+            {% for proyecto in proyectos %}
+            <div class="proyecto-box">
+                <div class="proyecto-container">
+                    <p><strong>Nombre:</strong> {{ proyecto.nombre }}</p>
+                    <p><strong>Descripcion:</strong> {{ proyecto.descripcion }}</p>
+                    <p><strong>Fecha de Creacion:</strong> {{ proyecto.fecha_creacion }}</p>
+                    <p><strong>Fecha Fin:</strong> {{ proyecto.fecha_fin }}</p>
+                    <p><strong>ID:</strong> {{ proyecto.backlog_id }}</p>
+                
+                    <ul>
+                        {% for usuarioproyecto in proyecto.usuarioproyecto_set.all %}
+                            <li>{{ usuarioproyecto.usuario.nombre }} - {{ usuarioproyecto.rol_usuario.tipo_rol }}</li>
+                        {% endfor %}
+                    </ul>
+                
+                    <a href="edicionProyecto/{{proyecto.backlog_id}}" class="boton">Editar</a> &nbsp;&nbsp;
+                    <a href="eliminar_proyecto/{{proyecto.backlog_id}}">Eliminar</a> &nbsp;&nbsp;
+                    <a href="listar_sprint/{{proyecto.backlog_id}}">Sprints</a>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
-        <a href="edicionProyecto/{{proyecto.backlog_id}}" class="boton">Editar</a> &nbsp;&nbsp;
-        <a href="eliminar_proyecto/{{proyecto.backlog_id}}">Eliminar</a> &nbsp;&nbsp;
-        <a href="listar_sprint/{{proyecto.backlog_id}}">Sprints</a>
-    {% endfor %}
-    <br>
-    <br>
-    <button type="submit"><a href="/crear_proyecto" class="boton">CREAR PROYECTO</a></button>
-</div>
+        
+            <br>
+            <br>
+            <button type="submit" class="boton"><a href="/crear_proyecto" >CREAR PROYECTO</a></button>
+        </div>
+    </div>
 </body>
 </html>

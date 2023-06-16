@@ -5,54 +5,168 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar User Stories</title>
+    <style>
+      /* Estilos para el cuerpo de la página */
+      body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #e1f1f7;
+      }
+      
+      /* Estilos para el contenedor principal */
+      .container {
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #e1f1f7;
+          border-radius: 5px;
+          box-shadow: 0px 0px 10px #ddd;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      
+      /* Estilos para el contenedor de la tabla */
+      .table-container {
+          width: 100%;
+      }
+      
+      /* Estilos para el título */
+      h1 {
+          margin: 0;
+          font-size: 36px;
+          line-height: 1.2;
+          color: #0077b6;
+          margin-bottom: 20px;
+          text-align: center;
+      }
+      
+      /* Estilos para la tabla */
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          border: 1px solid #ddd;
+      }
+      
+      th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+          border-right: 1px solid #ddd;
+      }
+      
+      th {
+          background-color: #0077b6;
+          color: #fff;
+      }
+      
+      tbody tr:nth-child(even) {
+          background-color: #f2f2f2;
+      }
+      
+      /* Estilos para los enlaces */
+      a {
+        color: #333;
+          text-decoration: none;
+      }
+      
+      a:hover {
+          color: #333;
+          text-decoration: none;
+      }
+      
+      /* Estilos para los botones */
+      button[type="submit"] {
+          background-color: #0077b6;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 5px;
+          font-size: 14px;
+          cursor: pointer;
+      }
+      
+      button[type="submit"]:hover {
+          background-color: #023e8a;
+      }
+      
+      /* Estilos para el contenedor de botones */
+      .buttons-container {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 20px;
+          width: 100%;
+      }
+      
+      .buttons-container button {
+          margin-left: 10px;
+      }
+      
+      /* Estilos personalizados */
+      .boton {
+          background-color: #0077b6;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 5px;
+          font-size: 14px;
+          cursor: pointer;
+          text-decoration: none;
+      }
+      
+      .boton:hover {
+          background-color: #023e8a;
+      }
+    </style>
 </head>
 <body>
-    <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
-    <h1>User Stories</h1>
-  <div style="text-align: center;">
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre&nbsp;&nbsp;</th>
-          <th>Usuario Asignado&nbsp;&nbsp;</th>
-          <th>Rol&nbsp;&nbsp;</th>
-          <th>Descripción</th>
-          <th>Hecho</th>
-          <th>Story Points&nbsp;&nbsp;</th>
-          <th>Prioridad&nbsp;&nbsp;</th>
-          <th>Estado&nbsp;&nbsp;</th>
-          <th>Fecha Inicio&nbsp;&nbsp;</th>
-          <th>Fecha Fin&nbsp;&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user_story in user_stories %}
-          <tr>
-            <td>{{ user_story.nombre }}</td>
-            <td>{{ user_story.usuario_proyecto.usuario.nombre }}</td>
-            <td>{{ user_story.usuario_proyecto.rol_usuario.tipo_rol }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.descripcion }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.hecho }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.story_points }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.prioridad }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.estado.estado }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.fecha_inicio|date:'d/m/Y' }}&nbsp;&nbsp;</td>
-            <td>{{ user_story.fecha_fin|date:'d/m/Y' }}&nbsp;&nbsp;</td>
-            {% if user.id == 1 or user.id == user_story.usuario_proyecto.usuario.id or user.id == sm  %}
-            <td><a href="{% url 'editar_us' us_id=user_story.id_user_story %}">Editar</a>&nbsp;&nbsp;</td> 
-            <td><a href="{% url 'eliminar_us' us_id=user_story.id_user_story %}">Eliminar</a></td>
-            {% endif %}
-          </tr>
-
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <br>
-  <br>
-  <button type="submit"><a href="{% url 'crear_us' sprint_id=sprint_id %}" class="boton">CREAR USER STORY</a></button>
-  <button><a href="{% url 'kanban_board' sprint_id=sprint_id %}">Tablero</a></button>
-  <button><a href="{% url 'burndown_chart' sprint_id=sprint_id %}">burndown_chart</a></button>
-    
+    <div class="container">
+        <h1>User Stories</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre&nbsp;&nbsp;</th>
+                        <th>Usuario Asignado&nbsp;&nbsp;</th>
+                        <th>Rol&nbsp;&nbsp;</th>
+                        <th>Descripción</th>
+                        <th>Hecho</th>
+                        <th>Story Points&nbsp;&nbsp;</th>
+                        <th>Prioridad&nbsp;&nbsp;</th>
+                        <th>Estado&nbsp;&nbsp;</th>
+                        <th>Fecha Inicio&nbsp;&nbsp;</th>
+                        <th>Fecha Fin&nbsp;&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user_story in user_stories %}
+                        <tr>
+                            <td>{{ user_story.nombre }}</td>
+                            <td>{{ user_story.usuario_proyecto.usuario.nombre }}</td>
+                            <td>{{ user_story.usuario_proyecto.rol_usuario.tipo_rol }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.descripcion }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.hecho }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.story_points }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.prioridad }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.estado.estado }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.fecha_inicio|date:'d/m/Y' }}&nbsp;&nbsp;</td>
+                            <td>{{ user_story.fecha_fin|date:'d/m/Y' }}&nbsp;&nbsp;</td>
+                            {% if user.id == 1 or user.id == user_story.usuario_proyecto.usuario.id or user.id == sm  %}
+                            <td><a href="{% url 'editar_us' us_id=user_story.id_user_story %}">Editar</a>&nbsp;&nbsp;</td> 
+                            <td><a href="{% url 'eliminar_us' us_id=user_story.id_user_story %}">Eliminar</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons-container">
+          <button class="boton"><a href="/volver_home">Volver</a></button>
+          <button class="boton"><a href="{% url 'crear_us' sprint_id=sprint_id %}">CREAR USER STORY</a></button>
+          <button class="boton"><a href="{% url 'kanban_board' sprint_id=sprint_id %}">Tablero</a></button>
+          <button class="boton"><a href="{% url 'burndown_chart' sprint_id=sprint_id %}">Burndown Chart</a></button>
+      </div>
+    </div>
 </body>
 </html>

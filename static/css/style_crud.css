@@ -1,0 +1,165 @@
+/* Estilos para el cuerpo de la página */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+}
+
+/* Estilos para el contenedor principal */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #e1f1f7;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #ddd;
+}
+
+/* Estilos para el título */
+h1 {
+    margin: 0;
+    font-size: 36px;
+    line-height: 1.2;
+    color: #0077b6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos para el formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para los grupos de formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Estilos para las etiquetas */
+label {
+    font-size: 18px;
+    color: #0077b6;
+    margin-bottom: 5px;
+}
+
+/* Estilos para las entradas de texto */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 0;
+    margin: 0 auto;
+    font-size: 18px;
+    display: block;
+    width: 50%;
+    background-color: #e1f1f7;
+}
+
+/* Estilos para el botón */
+button[type="submit"] {
+    background-color: #0077b6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #023e8a;
+}
+
+/* Estilos para las alertas */
+.alert {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    opacity: 0.8;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.alert-success {
+    background-color: #0077B6;
+}
+
+.alert-info {
+    background-color: #48CAE4;
+}
+
+.alert-warning {
+    background-color: #F8B400;
+}
+
+.alert-danger {
+    background-color: #F58220;
+}
+
+button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a {
+    color: #0077b6;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #48CAE4;
+    text-decoration: none;
+}
+
+.user-box {
+    background-color: #c4e8f5;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user-container {
+    border-bottom: 1px solid #666;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+
+.proyecto-box {
+    background-color: #c4e8f5;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.proyecto-container {
+    border-bottom: 1px solid #666; 
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons-container button {
+    margin: 0 10px;
+}

@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido/a</title>
-    <!--link rel="stylesheet" href="{% static 'css/style.css' %}"-->
-    
     <link rel="stylesheet" href="{% static 'css/styleSignin.css' %}">
 </head>
 <body>
@@ -26,18 +24,15 @@
         <h1>Bienvenido/a al Gestor de proyectos.</h1>
         <p>Este es un sitio web en proceso de construccion.</p>
         {% if user.is_authenticated %}
-        <button type="submit"><a href="/listar_usuarios" class="boton">CRUD USUARIOS</a></button>
+        <button type="submit" class="boton"><a href="/listar_usuarios" >CRUD USUARIOS</a></button>
         <hr>
-        <button type="submit"><a href="/listar_proyectos" class="boton">CRUD PROYECTOS</a></button>
+        <button type="submit" class="boton"><a href="/listar_proyectos" >CRUD PROYECTOS</a></button>
         <h3>Hola {{ fname }}</h3>
         <h4>Ingresaste correctamente. </h4>
         <button type="submit" class = "boton"><a href="/signout" >cerrar sesion</a></button>
         {% else %}
-        <button type="submit" class ="boton" ><a href="/signin" >iniciar sesion</a></button>
+        <button type="submit" class ="boton"><a href="/signin" >iniciar sesion</a></button>
         {% endif %}
     </div>
-
-
-
 </body>
 </html>

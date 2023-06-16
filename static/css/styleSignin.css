@@ -79,50 +79,55 @@ button[type="submit"]:hover {
 
 /* Estilos para las alertas */
 .alert {
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  color: #fff;
-  text-align: center;
-  position: relative;
-  }
-  
-  .alert-dismissible .close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  color: #fff;
-  opacity: 0.8;
-  font-size: 20px;
-  font-weight: bold;
-  }
-  
-  .alert-success {
-  background-color: #0077B6;
-  }
-  
-  .alert-info {
-  background-color: #48CAE4;
-  }
-  
-  .alert-warning {
-  background-color: #F8B400;
-  }
-  
-  .alert-danger {
-  background-color: #F58220;
-  }
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	color: #fff;
+	text-align: center;
+	position: relative;
+}
 
-  .inicio_sesion {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #e1f1f7;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+.alert-dismissible .close {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	color: #fff;
+	opacity: 0.8;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.alert-success {
+	background-color: #0077B6;
+}
+
+.alert-info {
+	background-color: #48CAE4;
+}
+
+.alert-warning {
+	background-color: #F8B400;
+}
+
+.alert-danger {
+	background-color: #F58220;
+}
+
+.inicio_sesion {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #e1f1f7;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #ffffff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+button a {
+    color: #fff;
+    text-decoration: none;
 }
