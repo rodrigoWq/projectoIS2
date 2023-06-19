@@ -67,12 +67,12 @@
       
       /* Estilos para los enlaces */
       a {
-        color: #333;
+        color: #e1f1f7;
           text-decoration: none;
       }
       
       a:hover {
-          color: #333;
+          color: #e1f1f7;
           text-decoration: none;
       }
       
@@ -93,15 +93,16 @@
       
       /* Estilos para el contenedor de botones */
       .buttons-container {
-          display: flex;
-          justify-content: flex-end;
-          margin-top: 20px;
-          width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 20px;
+        width: 100%;
       }
       
-      .buttons-container button {
-          margin-left: 10px;
-      }
+      .buttons-container .boton {
+        margin: 0;
+        }
       
       /* Estilos personalizados */
       .boton {
@@ -122,6 +123,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="buttons-container" >
+            <button class="boton" style="align-self: flex-start;"><a href="/volver_home">Volver</a></button>
+        </div>
         <h1>User Stories</h1>
         <div class="table-container">
             <table>
@@ -162,7 +166,6 @@
             </table>
         </div>
         <div class="buttons-container">
-          <button class="boton"><a href="/volver_home">Volver</a></button>
           <button class="boton"><a href="{% url 'crear_us' sprint_id=sprint_id %}">CREAR USER STORY</a></button>
           <button class="boton"><a href="{% url 'kanban_board' sprint_id=sprint_id %}">Tablero</a></button>
           <button class="boton"><a href="{% url 'burndown_chart' sprint_id=sprint_id %}">Burndown Chart</a></button>

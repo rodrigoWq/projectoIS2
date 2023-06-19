@@ -12,12 +12,12 @@
         
         /* Estilos para los enlaces */
         a {
-            color: #333;
+            color: #e1f1f7;
             text-decoration: none;
         }
         
         a:hover {
-            color: #333;
+            color: #e1f1f7;
             text-decoration: none;
         }
         
@@ -33,6 +33,18 @@
             cursor: pointer;
             text-decoration: none;
         }
+
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+            width: 100%;
+          }
+          
+          .buttons-container .boton {
+            margin: 0;
+            }
         
         button[type="submit"]:hover,
         .boton:hover {
@@ -90,19 +102,12 @@
             margin: 0 auto;
         }
         
-        /* Estilos para el contenedor de botones */
-        .buttons-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="buttons-container">
-            <button type="submit"><a href="/volver_home" class="boton">Volver</a></button>
+        <div class="buttons-container" >
+            <button class="boton" style="align-self: flex-start;"><a href="/volver_home">Volver</a></button>
         </div>
         <h1>Burndown Chart</h1>
 
